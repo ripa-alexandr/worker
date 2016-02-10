@@ -1,0 +1,51 @@
+﻿@model Worker.Web.ViewModel.Employee.EmployeeViewModel
+
+@{
+    ViewBag.Title = "Удаление сотрудника";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Вы действительно хотите удалить сотрудника?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Position)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Position)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Salary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Salary)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.HiddenFor(i => i.Filter.PageSize)
+        @Html.HiddenFor(i => i.Filter.StatusFilter)
+        
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" />
+            <input type="button" value="Отмена" class="btn btn-default" onclick="location.href='@Url.Action("Index", Model.Filter)'" />
+        </div>
+    }
+</div>

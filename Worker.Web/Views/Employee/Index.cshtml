@@ -1,0 +1,40 @@
+﻿@model Worker.Web.ViewModel.Employee.EmployeePageViewModel
+
+@{
+    ViewBag.Title = "Список сотрудников";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@Html.HiddenFor(i => i.Filter.CurrentPage)
+@Html.HiddenFor(i => i.Filter.PageSize)
+
+<div class="row">
+    <div class="col-md-10">
+        <div id="slideSwitch">
+            <h4>Фильтр</h4>
+        </div>
+
+        <div class="filter">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Filter.StatusFilter, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(i => i.Filter.StatusFilter, Model.AllStatuses, "...", new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="button" value="Применить" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        @Html.ActionLink("Сформировать отчет", "GenerateReport")
+    </div>
+</div>
+
+<div class="table-section">
+    @Html.Partial("EmployeeTable", Model)
+</div>
+
+@Scripts.Render("~/bundles/employee")

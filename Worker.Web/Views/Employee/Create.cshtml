@@ -1,0 +1,13 @@
+﻿@model Worker.Web.ViewModel.Employee.EmployeeViewModel
+
+@{
+    ViewBag.Title = "Создание сотрудника";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.EditorForModel("EmployeeEditor")
+}
+

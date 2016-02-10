@@ -1,0 +1,77 @@
+﻿@using Worker.Utilites.Extensions
+@using Worker.Web.Helpers
+@using Worker.Web.ViewModel.Employee
+@model Worker.Web.ViewModel.Employee.EmployeePageViewModel
+
+<p>
+    @Html.ActionLink("Создать", "Create", new { Model.Filter.StatusFilter, Model.Filter.CurrentPage, Model.Filter.PageSize })
+</p>
+
+<div class="inline-group">
+    @Html.PageSizes(Model.Filter.PageSize.Value)
+    <span>
+        <h6>Размер страницы</h6>
+    </span>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Employees.First().Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employees.First().Position)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employees.First().Salary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employees.First().Status)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Employees)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Position)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Salary)
+            </td>
+            <td>
+                @(((StatusViewModel)item.Status).ToDescription())
+            </td>
+            <td>
+                @Html.ActionLink("Редактировать", "Edit", GetFilteredParams(item.Id.Value)) |
+                @Html.ActionLink("Детали", "Details", GetFilteredParams(item.Id.Value)) |
+                @Html.ActionLink("Удалить", "Delete", GetFilteredParams(item.Id.Value))
+            </td>
+        </tr>
+    }
+</table>
+
+<div class="text-center">
+    @Html.PageLinks(Model.Filter)
+</div>
+
+@functions{
+    object GetFilteredParams(int id)
+    {
+        var result = new
+        {
+            id,
+            Model.Filter.StatusFilter,
+            Model.Filter.CurrentPage,
+            Model.Filter.PageSize
+        };
+
+        return result;
+    }
+}
+
+

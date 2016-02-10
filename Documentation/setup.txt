@@ -1,0 +1,9 @@
+1. Run scripts in Worker.DAL/Scripts
+
+2. Set connection strings
+
+Worker.Web
+<add name="Worker" connectionString="Data Source=.;Initial Catalog=Worker;Integrated Security=SSPI;MultipleActiveResultSets = True" providerName="System.Data.SqlClient" />
+
+3. For run NUnit tests inside Visual Studio you have to install NUnit Test Adapter for Visual Studio
+
